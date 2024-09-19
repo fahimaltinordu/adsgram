@@ -24,7 +24,7 @@ for (i = 0; i < acc.length; i++) {
 
 }
 
-const adsgram_blockId = '2808';
+const adsgram_blockId = '3260';
 const adsgramReward = 200;
 
 const AdController = window.Adsgram.init({ blockId: adsgram_blockId });
@@ -72,7 +72,7 @@ watchAddBtn.addEventListener('click', async () => {
   watchAddBtn.textContent = `...`
   await AdController.show()
     .then((result) => {
-      addCoins(adsgramReward);
+      console.log(`${adsgramReward} coin added`);
       adData.count += 1;
       watchAddBtn.textContent = "Watch"
       setAdData(adData);
