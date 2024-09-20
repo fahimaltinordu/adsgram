@@ -1,3 +1,32 @@
+
+// USER INFO //////////////////////////////////////////////
+const playerName = document.querySelector('.player__name');
+const playerUserId = document.querySelector('.player__userId');
+
+if (window.Telegram && window.Telegram.WebApp) {
+  const TELEGRAM = window.Telegram.WebApp;
+
+  TELEGRAM.ready();
+  TELEGRAM.disableVerticalSwipes();
+  TELEGRAM.enableClosingConfirmation();
+  TELEGRAM.setHeaderColor('#3176b5');
+  TELEGRAM.expand();
+
+  const user = TELEGRAM.initDataUnsafe.user;
+  if(user) {
+    playerName.textContent = user.first_name;
+    playerUserId.textContent = user.id;
+  }else {
+    playerName.textContent = "No Username";
+    playerUserId.textContent = "No User ID";
+  }
+
+} else {
+  console.log('Telegram WebApp is not available.');
+}
+////////////////////////////////////////////////////////////
+
+
 let acc = document.querySelectorAll(".accordion");
 let i;
 
