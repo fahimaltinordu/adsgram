@@ -1,15 +1,15 @@
 // MOBILE CONTROL
-function responsiveScript() {
-  if (window.innerWidth >= 767) {
-    document.querySelector(".noMobile").style.display = "flex";
-  }else {
-    document.querySelector(".noMobile").style.display = "none";
-  }
-}
+// function responsiveScript() {
+//   if (window.innerWidth >= 767) {
+//     document.querySelector(".noMobile").style.display = "flex";
+//   }else {
+//     document.querySelector(".noMobile").style.display = "none";
+//   }
+// }
 
-responsiveScript();
+// responsiveScript();
 
-window.addEventListener("resize", responsiveScript);
+// window.addEventListener("resize", responsiveScript);
 
 
 // USER INFO //////////////////////////////////////////////
@@ -18,13 +18,26 @@ const playerUserId = document.querySelector('.player__userId');
 
 if (window.Telegram && window.Telegram.WebApp) {
   const TELEGRAM = window.Telegram.WebApp;
-  console.log(TELEGRAM.platform)
   TELEGRAM.ready();
   TELEGRAM.disableVerticalSwipes();
   TELEGRAM.enableClosingConfirmation();
   TELEGRAM.setHeaderColor('#3176b5');
   TELEGRAM.expand();
 
+  //only mobile
+  if(TELEGRAM.platform === "android") {
+    document.querySelector(".noMobile").style.display = "none";
+  }else if(TELEGRAM.platform === "iOS") {
+    document.querySelector(".noMobile").style.display = "none";
+  }else if(TELEGRAM.platform === "weba") {
+    document.querySelector(".noMobile").style.display = "flex";
+  }else if(TELEGRAM.platform === "unknown") { //normal browser
+    document.querySelector(".noMobile").style.display = "none";
+  }else {
+    document.querySelector(".noMobile").style.display = "flex";
+  }
+
+  //assign user data
   const user = TELEGRAM.initDataUnsafe.user;
   if(user) {
     playerName.textContent = `user: ${user.first_name}`;
