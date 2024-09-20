@@ -18,7 +18,7 @@ const playerUserId = document.querySelector('.player__userId');
 
 if (window.Telegram && window.Telegram.WebApp) {
   const TELEGRAM = window.Telegram.WebApp;
-
+  console.log(TELEGRAM.platform)
   TELEGRAM.ready();
   TELEGRAM.disableVerticalSwipes();
   TELEGRAM.enableClosingConfirmation();
