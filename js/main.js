@@ -1,3 +1,16 @@
+// MOBILE CONTROL
+function responsiveScript() {
+  if (window.innerWidth >= 767) {
+    document.querySelector(".noMobile").style.display = "flex";
+  }else {
+    document.querySelector(".noMobile").style.display = "none";
+  }
+}
+
+responsiveScript();
+
+window.addEventListener("resize", responsiveScript);
+
 
 // USER INFO //////////////////////////////////////////////
 const playerName = document.querySelector('.player__name');
@@ -14,11 +27,11 @@ if (window.Telegram && window.Telegram.WebApp) {
 
   const user = TELEGRAM.initDataUnsafe.user;
   if(user) {
-    playerName.textContent = user.first_name;
-    playerUserId.textContent = user.id;
+    playerName.textContent = `user: ${user.first_name}`;
+    playerUserId.textContent = `id: ${user.id}`;
   }else {
-    playerName.textContent = "No Username";
-    playerUserId.textContent = "No User ID";
+    playerName.textContent = `user: No user`;
+    playerUserId.textContent = `id: No ID`;
   }
 
 } else {
