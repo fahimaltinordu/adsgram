@@ -173,14 +173,41 @@ body {
 .promiseGif {
     width:15px;
 }
-
+.user {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size:1.25rem;
+    border: 1px solid gray;
+    height: 5dvh;
+    padding: 5px;
+    margin-top: 10px;
+}
+.noMobile {
+    position:absolute;
+    top:0;
+    left:0;
+    height:100dvh;
+    width: 100%;
+    z-index:1000;
+    background-color:black;
+    display:none;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    font-size:1.5rem;
+}
 @media (max-width:670px) {
 
     .card,
-    .panel {
+    .panel,
+    .user {
         width: 90%;
     }
-
+    .user {
+        font-size:0.9rem;
+    }
     .card .description p {
         font-size: 0.9rem;
     }
