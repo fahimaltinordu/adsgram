@@ -1,20 +1,7 @@
-// MOBILE CONTROL
-// function responsiveScript() {
-//   if (window.innerWidth >= 767) {
-//     document.querySelector(".noMobile").style.display = "flex";
-//   }else {
-//     document.querySelector(".noMobile").style.display = "none";
-//   }
-// }
-
-// responsiveScript();
-
-// window.addEventListener("resize", responsiveScript);
-
-
 // USER INFO //////////////////////////////////////////////
 const playerName = document.querySelector('.player__name');
 const playerUserId = document.querySelector('.player__userId');
+const noMobileElement = document.querySelector(".noMobile");
 
 if (window.Telegram && window.Telegram.WebApp) {
   const TELEGRAM = window.Telegram.WebApp;
@@ -25,17 +12,28 @@ if (window.Telegram && window.Telegram.WebApp) {
   TELEGRAM.expand();
 
   //only mobile
-  if(TELEGRAM.platform === "android") {
-    document.querySelector(".noMobile").style.display = "none";
-  }else if(TELEGRAM.platform === "iOS") {
-    document.querySelector(".noMobile").style.display = "none";
-  }else if(TELEGRAM.platform === "weba") {
-    document.querySelector(".noMobile").style.display = "flex";
-  }else if(TELEGRAM.platform === "unknown") { //normal browser
-    document.querySelector(".noMobile").style.display = "none";
-  }else {
-    document.querySelector(".noMobile").style.display = "flex";
+  switch (TELEGRAM.platform){ 
+    case "android": 
+    case "ios": noMobileElement.style.display = "none"; 
+    break; 
+    case"weba": 
+    case "unknown": noMobileElement.style.display = "flex"; 
+    break; 
+    default: noMobileElement.style.display = "flex"; 
+    break; 
   }
+
+  // if(TELEGRAM.platform === "android") {
+  //   document.querySelector(".noMobile").style.display = "none";
+  // }else if(TELEGRAM.platform === "ios") {
+  //   document.querySelector(".noMobile").style.display = "none";
+  // }else if(TELEGRAM.platform === "weba") {
+  //   document.querySelector(".noMobile").style.display = "flex";
+  // }else if(TELEGRAM.platform === "unknown") { //normal browser
+  //   document.querySelector(".noMobile").style.display = "none";
+  // }else {
+  //   document.querySelector(".noMobile").style.display = "flex";
+  // }
 
   //assign user data
   const user = TELEGRAM.initDataUnsafe.user;
