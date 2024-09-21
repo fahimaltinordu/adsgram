@@ -1,10 +1,14 @@
 // USER INFO //////////////////////////////////////////////
 const playerName = document.querySelector('.player__name');
 const playerUserId = document.querySelector('.player__userId');
-const noMobileElement = document.querySelector(".noMobile");
+const noMobileElement = document.querySelector('.noMobile');
+const referralURL = document.querySelector('#ref_link');
+const inviteCount = document.querySelector("#invite_count");
+const botLink = "https://t.me/ILCOIN_Earn_bot/ilcoin?startapp=";
 
 if (window.Telegram && window.Telegram.WebApp) {
   const TELEGRAM = window.Telegram.WebApp;
+  console.log(TELEGRAM.initData.start_param);
   TELEGRAM.ready();
   TELEGRAM.disableVerticalSwipes();
   TELEGRAM.enableClosingConfirmation();
@@ -17,32 +21,24 @@ if (window.Telegram && window.Telegram.WebApp) {
     case "ios": noMobileElement.style.display = "none"; 
     break; 
     case"weba": 
-    case "unknown": noMobileElement.style.display = "flex"; 
+    case "unknown": noMobileElement.style.display = "none"; //FLEX OLACAK 
     break; 
     default: noMobileElement.style.display = "flex"; 
     break; 
   }
-
-  // if(TELEGRAM.platform === "android") {
-  //   document.querySelector(".noMobile").style.display = "none";
-  // }else if(TELEGRAM.platform === "ios") {
-  //   document.querySelector(".noMobile").style.display = "none";
-  // }else if(TELEGRAM.platform === "weba") {
-  //   document.querySelector(".noMobile").style.display = "flex";
-  // }else if(TELEGRAM.platform === "unknown") { //normal browser
-  //   document.querySelector(".noMobile").style.display = "none";
-  // }else {
-  //   document.querySelector(".noMobile").style.display = "flex";
-  // }
 
   //assign user data
   const user = TELEGRAM.initDataUnsafe.user;
   if(user) {
     playerName.textContent = `user: ${user.first_name}`;
     playerUserId.textContent = `id: ${user.id}`;
+    referralURL.textContent = `Your referral URL: ${botLink+user.id}`;
+    inviteCount.textContent = `0`;
   }else {
     playerName.textContent = `user: No user`;
     playerUserId.textContent = `id: No ID`;
+    referralURL.textContent = `No user`;
+    inviteCount.textContent = `0`;
   }
 
 } else {
@@ -77,6 +73,7 @@ for (i = 0; i < acc.length; i++) {
 
 }
 
+//ADSGRAM INTEGRATION ///////////////////////////////////////////////
 const adsgram_blockId = '3260';
 const adsgramReward = 200;
 
@@ -136,3 +133,17 @@ watchAddBtn.addEventListener('click', async () => {
       watchAddBtn.textContent = "Watch"
     });
 });
+////////////////////////////////////////////////////////////
+
+
+ // if(TELEGRAM.platform === "android") {
+  //   document.querySelector(".noMobile").style.display = "none";
+  // }else if(TELEGRAM.platform === "ios") {
+  //   document.querySelector(".noMobile").style.display = "none";
+  // }else if(TELEGRAM.platform === "weba") {
+  //   document.querySelector(".noMobile").style.display = "flex";
+  // }else if(TELEGRAM.platform === "unknown") { //normal browser
+  //   document.querySelector(".noMobile").style.display = "none";
+  // }else {
+  //   document.querySelector(".noMobile").style.display = "flex";
+  // }
