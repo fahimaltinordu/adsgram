@@ -65,7 +65,8 @@ body {
     padding-top: 10px;
 }
 
-.cards {
+.cards,
+.cards2 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,7 +74,7 @@ body {
     width: 100%;
 }
 
-.panel {
+.panel, .panel2 {
     border: 1px solid gray;
     overflow: hidden;
     width: 70%;
@@ -86,8 +87,21 @@ body {
     color: yellow;
     opacity: 0.5;
 }
+.panel2 {
+    flex-direction:column;
+}
+.panel2 p {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+.panel2 p:nth-child(1){
+    margin-bottom:10px;
+}
+.panel2 p span {
+    color:#ffffff
+}
 
-.accordion {
+.accordion, .accordion2 {
     cursor: pointer;
     transition: 0.5s;
     -webkit-tap-highlight-color: transparent;
@@ -98,7 +112,8 @@ body {
     /* margin-right: 50px; */
 }
 
-.card {
+.card,
+.card2 {
     border: 1px solid gray;
     border-radius: 8px;
     width: 70%;
@@ -111,23 +126,27 @@ body {
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
 }
 
-.card img {
+.card img,
+.card2 img {
     height: 8dvh;
     filter: drop-shadow(0 0 0.1rem #000000);
 }
-.card .description {
+.card .description,
+.card2 .description {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.card .description p {
+.card .description p,
+.card2 .description p {
     font-size: 1.5rem;
     text-align: center;
 }
 
-.card .description > span {
+.card .description > span,
+.card2 .description > span {
     font-size: 1.2rem;
     text-align: center;
 }
@@ -137,7 +156,8 @@ body {
     opacity: 0.5;
 }
 
-.card button {
+.card button,
+.card2 button {
     /* padding: 0 20px; */
     border-radius: 6px;
     background-color: #3176b5;
@@ -150,12 +170,15 @@ body {
     transition: 0.5s;
 }
 
-.card button:hover {
+.card button:hover,
+.card2 button:hover
+ {
     background-color: #0084ff;
     transition: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.card button:active {
+.card button:active,
+.card2 button:active {
     transform: scale(0.9);
 }
 
@@ -202,22 +225,27 @@ body {
 @media (max-width:670px) {
 
     .card,
+    .card2,
     .panel,
+    .panel2,
     .user {
         width: 90%;
     }
     .user {
         font-size:0.9rem;
     }
-    .card .description p {
+    .card .description p, 
+    .card2 .description p {
         font-size: 0.9rem;
     }
 
-    .card .description span {
+    .card .description span, 
+    .card2 .description span {
         font-size: 0.9rem;
     }
 
-    .card button {
+    .card button,
+    .card2 button {
         font-size: 0.9rem;
         width: 8dvh;
     }

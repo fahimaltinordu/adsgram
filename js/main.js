@@ -16,25 +16,25 @@ if (window.Telegram && window.Telegram.WebApp) {
   TELEGRAM.expand();
 
   //only mobile
-  switch (TELEGRAM.platform){ 
-    case "android": 
-    case "ios": noMobileElement.style.display = "none"; 
-    break; 
-    case"weba": 
+  switch (TELEGRAM.platform) {
+    case "android":
+    case "ios": noMobileElement.style.display = "none";
+      break;
+    case "weba":
     case "unknown": noMobileElement.style.display = "none"; //FLEX OLACAK 
-    break; 
-    default: noMobileElement.style.display = "flex"; 
-    break; 
+      break;
+    default: noMobileElement.style.display = "flex";
+      break;
   }
 
   //assign user data
   const user = TELEGRAM.initDataUnsafe.user;
-  if(user) {
+  if (user) {
     playerName.textContent = `user: ${user.first_name}`;
     playerUserId.textContent = `id: ${user.id}`;
-    referralURL.textContent = `Your referral URL: ${botLink+user.id}`;
+    referralURL.textContent = `${botLink + user.id}`;
     inviteCount.textContent = `0`;
-  }else {
+  } else {
     playerName.textContent = `user: No user`;
     playerUserId.textContent = `id: No ID`;
     referralURL.textContent = `No user`;
@@ -47,31 +47,48 @@ if (window.Telegram && window.Telegram.WebApp) {
 ////////////////////////////////////////////////////////////
 
 
-let acc = document.querySelectorAll(".accordion");
-let i;
+let acc = document.querySelector(".accordion");
+let acc2 = document.querySelector(".accordion2");
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function () {
-    this.classList.toggle("active");
-    let panel = document.querySelector(".panel");
-    if (panel.style.display === "flex") {
-      panel.style.display = "none";
-      document.querySelector(".card").style.borderBottomLeftRadius = "8px";
-      document.querySelector(".card").style.borderBottomRightRadius = "8px";
-      document.querySelector(".card").style.boxShadow = "0px 8px 15px rgba(0, 0, 0, 0.5)";
-      document.querySelector(".panel").style.borderBottomLeftRadius = "0";
-      document.querySelector(".panel").style.borderBottomRightRadius = "0";
-    } else {
-      panel.style.display = "flex";
-      document.querySelector(".card").style.borderBottomLeftRadius = "0";
-      document.querySelector(".card").style.borderBottomRightRadius = "0";
-      document.querySelector(".card").style.boxShadow = "none";
-      document.querySelector(".panel").style.borderBottomLeftRadius = "8px";
-      document.querySelector(".panel").style.borderBottomRightRadius = "8px";
-    }
-  });
+acc.addEventListener("click", function () {
+  this.classList.toggle("active");
+  let panel = document.querySelector(".panel");
+  if (panel.style.display === "flex") {
+    panel.style.display = "none";
+    document.querySelector(".card").style.borderBottomLeftRadius = "8px";
+    document.querySelector(".card").style.borderBottomRightRadius = "8px";
+    document.querySelector(".card").style.boxShadow = "0px 8px 15px rgba(0, 0, 0, 0.5)";
+    document.querySelector(".panel").style.borderBottomLeftRadius = "0";
+    document.querySelector(".panel").style.borderBottomRightRadius = "0";
+  } else {
+    panel.style.display = "flex";
+    document.querySelector(".card").style.borderBottomLeftRadius = "0";
+    document.querySelector(".card").style.borderBottomRightRadius = "0";
+    document.querySelector(".card").style.boxShadow = "none";
+    document.querySelector(".panel").style.borderBottomLeftRadius = "8px";
+    document.querySelector(".panel").style.borderBottomRightRadius = "8px";
+  }
+});
+acc2.addEventListener("click", function () {
+  this.classList.toggle("active");
+  let panel2 = document.querySelector(".panel2");
+  if (panel2.style.display === "flex") {
+    panel2.style.display = "none";
+    document.querySelector(".card2").style.borderBottomLeftRadius = "8px";
+    document.querySelector(".card2").style.borderBottomRightRadius = "8px";
+    document.querySelector(".card2").style.boxShadow = "0px 8px 15px rgba(0, 0, 0, 0.5)";
+    document.querySelector(".panel2").style.borderBottomLeftRadius = "0";
+    document.querySelector(".panel2").style.borderBottomRightRadius = "0";
+  } else {
+    panel2.style.display = "flex";
+    document.querySelector(".card2").style.borderBottomLeftRadius = "0";
+    document.querySelector(".card2").style.borderBottomRightRadius = "0";
+    document.querySelector(".card2").style.boxShadow = "none";
+    document.querySelector(".panel2").style.borderBottomLeftRadius = "8px";
+    document.querySelector(".panel2").style.borderBottomRightRadius = "8px";
+  }
+});
 
-}
 
 //ADSGRAM INTEGRATION ///////////////////////////////////////////////
 const adsgram_blockId = '3260';
@@ -136,14 +153,14 @@ watchAddBtn.addEventListener('click', async () => {
 ////////////////////////////////////////////////////////////
 
 
- // if(TELEGRAM.platform === "android") {
-  //   document.querySelector(".noMobile").style.display = "none";
-  // }else if(TELEGRAM.platform === "ios") {
-  //   document.querySelector(".noMobile").style.display = "none";
-  // }else if(TELEGRAM.platform === "weba") {
-  //   document.querySelector(".noMobile").style.display = "flex";
-  // }else if(TELEGRAM.platform === "unknown") { //normal browser
-  //   document.querySelector(".noMobile").style.display = "none";
-  // }else {
-  //   document.querySelector(".noMobile").style.display = "flex";
-  // }
+// if(TELEGRAM.platform === "android") {
+//   document.querySelector(".noMobile").style.display = "none";
+// }else if(TELEGRAM.platform === "ios") {
+//   document.querySelector(".noMobile").style.display = "none";
+// }else if(TELEGRAM.platform === "weba") {
+//   document.querySelector(".noMobile").style.display = "flex";
+// }else if(TELEGRAM.platform === "unknown") { //normal browser
+//   document.querySelector(".noMobile").style.display = "none";
+// }else {
+//   document.querySelector(".noMobile").style.display = "flex";
+// }
