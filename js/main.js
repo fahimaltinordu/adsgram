@@ -5,7 +5,7 @@ const noMobileElement = document.querySelector('.noMobile');
 // const referralURL = document.querySelector('#ref_link');
 // const inviteCount = document.querySelector("#invite_count");
 const shareBtn = document.querySelector('#shareRefLink');
-const copyBtn = document.querySelector('#copyLink')
+// const copyBtn = document.querySelector('#copyLink')
 
 const botLink = "https://t.me/ILCOIN_Earn_bot/ilcoin?startapp=";
 
@@ -35,11 +35,11 @@ if (window.Telegram && window.Telegram.WebApp) {
   const user = TELEGRAM.initDataUnsafe.user;
   if (user) {
     playerName.textContent = `${user.first_name}`;
-    playerUserId.textContent = `id: ${user.id}`;
+    playerUserId.textContent = `${user.id}`;
     url_tier= user.id;
   } else {
     playerName.textContent = `No user`;
-    playerUserId.textContent = `id: No ID`;
+    playerUserId.textContent = `No ID`;
   }
 
   //referral
@@ -47,16 +47,13 @@ if (window.Telegram && window.Telegram.WebApp) {
   console.log(ref_link);
   shareBtn.addEventListener('click', async () => {
     const link = `https://t.me/share/url?url=${encodeURIComponent('join, invite and earn more 🪙')}&text=${encodeURIComponent(ref_link)}`;
-    shareBtn.innerHTML = `<img class="promiseGif" src='../img/promiseGif.gif' />`
     await TELEGRAM.openTelegramLink(link);
-    shareBtn.innerHTML = `<span>Invite a friend</span> <img src="../img/share.png" alt="">`
   });
-  copyBtn.addEventListener('click', async () => {
-    copyBtn.innerHTML = `<img class="promiseGif" src='../img/promiseGif.gif' />`
-    await navigator.clipboard.writeText(ref_link);
-    copyBtn.innerHTML = `<span>Copy</span> <img src="../img/clipboard.png" alt="">`;
-    console.log(`copied successfully, URL: ${ref_link}`)
-  });
+
+  // copyBtn.addEventListener('click', async () => {
+  //   await navigator.clipboard.writeText(ref_link);
+  //   console.log(`copied successfully, URL: ${ref_link}`)
+  // });
 
 } else {
   console.log('Telegram WebApp is not available.');
@@ -65,6 +62,7 @@ if (window.Telegram && window.Telegram.WebApp) {
 
 
 let acc = document.querySelector(".accordion");
+let acc2 = document.querySelector(".accordion2");
 
 acc.addEventListener("click", function () {
   this.classList.toggle("active");
@@ -83,6 +81,26 @@ acc.addEventListener("click", function () {
     document.querySelector(".card").style.boxShadow = "none";
     document.querySelector(".panel").style.borderBottomLeftRadius = "8px";
     document.querySelector(".panel").style.borderBottomRightRadius = "8px";
+  }
+});
+
+acc2.addEventListener("click", function () {
+  this.classList.toggle("active");
+  let panel2 = document.querySelector(".panel2");
+  if (panel2.style.display === "flex") {
+    panel2.style.display = "none";
+    document.querySelector(".card2").style.borderBottomLeftRadius = "8px";
+    document.querySelector(".card2").style.borderBottomRightRadius = "8px";
+    document.querySelector(".card2").style.boxShadow = "0px 1px 6px rgba(95, 243, 208, 0.5)";
+    document.querySelector(".panel2").style.borderBottomLeftRadius = "0";
+    document.querySelector(".panel2").style.borderBottomRightRadius = "0";
+  } else {
+    panel2.style.display = "flex";
+    document.querySelector(".card2").style.borderBottomLeftRadius = "0";
+    document.querySelector(".card2").style.borderBottomRightRadius = "0";
+    document.querySelector(".card2").style.boxShadow = "none";
+    document.querySelector(".panel2").style.borderBottomLeftRadius = "8px";
+    document.querySelector(".panel2").style.borderBottomRightRadius = "8px";
   }
 });
 

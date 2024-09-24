@@ -62,7 +62,7 @@ body {
     position: absolute;
     top: 9dvh;
     left: 0;
-    padding-top: 10px;
+    padding-top: 15px;
     color:#000000;
 }
 
@@ -75,7 +75,7 @@ body {
     width: 100%;
 }
 
-.panel{
+.panel, .panel2 {
     border: 1px solid #5ff3d0;
     overflow: hidden;
     width: 70%;
@@ -87,17 +87,17 @@ body {
     box-shadow: 0px 1px 6px rgba(95, 243, 208, 0.5);
     color: black;
 }
-
-.btnContainer {
-    display:flex;
+.panel2 {
+    flex-direction:column;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap:10px;
-    margin-top:10px;
-    /* width:90%; */
 }
-.btnContainer button {
+
+/* #copyLink {
+    position:absolute;
+    top:0;
+    left:0;
+} */
+#shareRefLink {
     background-color: #000000;
     border-radius: 6px;
     display:flex;
@@ -112,14 +112,14 @@ body {
     font-weight:700;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
 }
-.btnContainer button:active {
+#shareRefLink:active {
     transform: scale(0.9);
 }
-.btnContainer button:nth-child(1) {
+#shareRefLink {
     animation: pulse 1.5s infinite;
     -webkit-animation: pulse 1.5s infinite;
 }
-.btnContainer button:hover {
+#shareRefLink:hover {
     animation: none;
     -webkit-animation: none;
   }
@@ -144,11 +144,11 @@ body {
     }
   }
   
-.btnContainer button img {
+#shareRefLink img {
     height:4dvh;
 }
 
-.accordion {
+.accordion, .accordion2 {
     cursor: pointer;
     transition: 0.5s;
     -webkit-tap-highlight-color: transparent;
@@ -161,10 +161,11 @@ body {
 
 .card,
 .card2 {
+    background-color: mintcream;
     border: 1px solid #5ff3d0;
     border-radius: 8px;
     width: 70%;
-    /* height: 10dvh; */
+    height: 10dvh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -172,16 +173,13 @@ body {
     gap: 10px;
     box-shadow: 0px 1px 6px rgba(95, 243, 208, 0.5);
 }
-.card2 {
-    justify-content: flex-start;
-}
-.frenCont {
-    flex-grow:1;
-}
+/* .card2 {
+    position:relative;
+} */
 
 .card img,
 .card2 img {
-    height: 8dvh;
+    height: 7dvh;
     filter: drop-shadow(0 0 0.05rem #5ff3d0);
 }
 .card .description,
@@ -203,14 +201,15 @@ body {
 .card2 .description > span {
     font-size: 1.2rem;
     text-align: center;
+    color: #008b6a;
 }
 
 .earn__item__watch-count {
-    color: #009d78;
+    color: #008b6a;
     opacity: 0.5;
 }
 
-.card button{
+#watchAddBtn{
     /* padding: 0 20px; */
     border-radius: 6px;
     background-color: #000000;
@@ -218,21 +217,29 @@ body {
     font-weight: 700;
     cursor: pointer;
     height: 6dvh;
-    width: 12dvh;
-    font-size: 1.25rem;
+    padding: 8px 10px;
+    font-size: 3dvh;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
     transition: 0.5s;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:7px;
+}
+#watchAddBtn img {
+    height:4dvh;
 }
 
-.card button:hover,
-.card2 button:hover
+#watchAddBtn:hover
  {
-    background-color: #5ff3d0;
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
     transition: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.card button:active,
-.card2 button:active {
+#watchAddBtn:active {
     transform: scale(0.9);
 }
 
@@ -261,15 +268,18 @@ body {
     border-radius: 8px;
     height: 7dvh;
     padding: 5px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
-.user .username {
+.user .username,
+.user .userid {
     display:flex;
     align-items: center;
     justify-content: center;
     gap:5px;
+    font-weight:700;
 }
-.user .username img {
+.user .username img,
+.user .userid img {
     height:4dvh;
 }
 .balance {
@@ -277,9 +287,13 @@ body {
     align-items: center;
     justify-content: center;
     gap:10px;
+    padding: 0px 7px;
 }
 .balance img{
     height:10dvh;
+}
+.balance h1{
+    font-size:7dvh;
 }
 .noMobile {
     position:absolute;
@@ -300,6 +314,7 @@ body {
     .card,
     .card2,
     .panel,
+    .panel2,
     .user {
         width: 90%;
     }
@@ -315,30 +330,61 @@ body {
     .card2 .description span {
         font-size: 0.9rem;
     }
-
-    .card button {
-        font-size: 0.9rem;
-        width: 8dvh;
+    .card img, .card2 img {
+        height:6.5dvh
     }
-    .btnContainer button {
-        font-size:2dvh;
+    #shareRefLink, 
+    #watchAddBtn {
+        font-size:1.8dvh;
     }
-    .btnContainer button img {
+    #shareRefLink img {
         height:3dvh;
     }
-    .user .username img {
+    #watchAddBtn img {
         height:3dvh;
+    }
+    .user .username img,
+    .user .userid img {
+        height:3dvh;
+    }
+    .balance img{
+        height:7dvh;
+    }
+    .balance h1{
+        font-size:5dvh;
+    }
+}
+@media (max-width:450px) {
+    .balance img{
+        height:6dvh;
+    }
+    .balance h1{
+        font-size:3.5dvh;
     }
 }
 @media (max-width:340px) {
-    .btnContainer button {
-        font-size:1.7dvh;
+    #shareRefLink,
+    #watchAddBtn {
+        font-size:1.6dvh;
     }
-    .btnContainer button img {
+    #shareRefLink img {
         height:2.5dvh;
     }
-    .user .username img {
+    #watchAddBtn img {
         height:2.5dvh;
+    }
+    .user .username img, 
+    .user .userid img {
+        height:2.5dvh;
+    }
+    .card img, .card2 img {
+        height:4dvh
+    }
+    .balance img{
+        height:5dvh;
+    }
+    .balance h1{
+        font-size:3dvh;
     }
 }
 
