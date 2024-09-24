@@ -6,15 +6,22 @@
     <link rel="stylesheet" href="style.css">
     <script src="js/webApp.js"></script>
     <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
-    <title>ILCOIN Faucet</title>
+    <title>ILCOIN Earn 🪙</title>
 </head>
 <body>
     <div class="noMobile">Switch to Telegram Mobile</div>
     <div class="app_container">
-        <div class="header">ILCOIN Faucet</div>
+        <div class="header">ILCOIN Earn 🪙</div>
         <div class="main">
+            <div class="balance">
+                <img src="./img/balance.png" class="noselect" alt="" >
+                <h1>1250,00 ILCOIN</h1>
+            </div>
             <div class="user">
-                <p class="player__name">xxx</p>
+                <div class="username">
+                    <img src="./img/user.png" class="noselect" alt="" >
+                    <p class="player__name">xxx</p>
+                </div>
                 <p class="player__userId">xxx</p>
             </div>
 
@@ -43,22 +50,20 @@
 
             <div class="cards2">
                 <div class="card2">
-                    <div class="accordion2">
                         <img src="./img/refer.png" class="noselect" alt="" >
-                        <div class="description noselect">
-                            <p>
-                                Invite friends
-                            </p>
-                            <span>+0.5 ILC per referral</span>
+                        <div class="frenCont">
+                            <div class="description noselect">
+                                <p>
+                                    Invite friends
+                                </p>
+                                <span>+0.5 ILC per referral</span>
+                            </div>
+                            <div class="btnContainer">
+                                <button id="shareRefLink"><span>Invite a friend</span> <img src="./img/share.png" alt=""></button>
+                                <button id="copyLink"><span>Copy</span> <img src="./img/clipboard.png" alt=""></button>
+                            </div>
                         </div>
-                    </div>
-                    <button id="share">Share</button>
                 </div>
-                <div class="panel2">
-                    <p><b>Your referral URL:</b> <span id="ref_link">x</span></p>
-                    <p><b>Invited friends:</b> <span id="invite_count">x</span></p>
-                </div>
-                
             </div>
 
 
