@@ -15,7 +15,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   TELEGRAM.ready();
   TELEGRAM.disableVerticalSwipes();
   TELEGRAM.enableClosingConfirmation();
-  TELEGRAM.setHeaderColor('#3176b5');
+  TELEGRAM.setHeaderColor('#000000');
   TELEGRAM.expand();
 
   //only mobile
@@ -30,20 +30,20 @@ if (window.Telegram && window.Telegram.WebApp) {
       break;
   }
 
-  let url_tier="";
+  let url_tier = "";
   //assign user data
   const user = TELEGRAM.initDataUnsafe.user;
   if (user) {
     playerName.textContent = `${user.first_name}`;
     playerUserId.textContent = `${user.id}`;
-    url_tier= user.id;
+    url_tier = user.id;
   } else {
     playerName.textContent = `No user`;
     playerUserId.textContent = `No ID`;
   }
 
   //referral
-  let ref_link = `${botLink+url_tier}`;
+  let ref_link = `${botLink + url_tier}`;
   console.log(ref_link);
   shareBtn.addEventListener('click', async () => {
     const link = `https://t.me/share/url?url=${encodeURIComponent('join, invite and earn more 🪙')}&text=${encodeURIComponent(ref_link)}`;
@@ -156,13 +156,13 @@ watchAddBtn.addEventListener('click', async () => {
     .then((result) => {
       console.log(`${adsgramReward} coin added`);
       adData.count += 1;
-      watchAddBtn.textContent = "Watch"
+      watchAddBtn.innerHTML = `<span>Watch</span> <img src="./img/see.png" alt="">`
       setAdData(adData);
       updateWatchCount();
     })
     .catch((result) => {
       console.log('error', 'No ads available!');
-      watchAddBtn.textContent = "Watch"
+      watchAddBtn.innerHTML = `<span>Watch</span> <img src="./img/see.png" alt="">`
     });
 });
 ////////////////////////////////////////////////////////////
