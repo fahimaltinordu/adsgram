@@ -316,11 +316,14 @@ body {
 /* LUCKY WHEEL */
 .wheel_cont {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
     height: 100dvh;
     width:100%;
+    padding-top: 10dvh;
+    gap:30px;
     background: #000000;
     position: absolute;
     top: 0;
@@ -345,10 +348,34 @@ body {
 
 #wheel {
     display: block;
+    width: 300px;
+    height: 300px;
 }
-
+.ticket {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+    position: absolute;
+    top:10px;
+    right:10px;
+    color:white;
+}
+.ticket img {
+    height:5dvh;
+}
+.ticket span {
+    font-size:4dvh;
+}
+.spin-desc {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width:90%;
+    color:white;
+}
 #spin {
-    font: 1.5em/0 sans-serif;
+    font: 2.5dvh sans-serif;
     user-select: none;
     cursor: pointer;
     display: flex;
@@ -362,7 +389,7 @@ body {
     margin: -15%;
     background: #fff;
     color: black;
-    box-shadow: 0 0 0 8px currentColor, 0 0px 15px 5px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 0 2px currentColor, 0 0px 15px 5px rgba(0, 0, 0, 0.6);
     border-radius: 50%;
     transition: 0.8s;
 }
@@ -370,7 +397,7 @@ body {
 #spin::after {
     content: "";
     position: absolute;
-    top: -17px;
+    top: -10px;
     border: 10px solid transparent;
     border-bottom-color: currentColor;
     border-top: none;

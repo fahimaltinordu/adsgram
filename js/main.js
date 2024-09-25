@@ -9,6 +9,19 @@ const shareBtn = document.querySelector('#shareRefLink');
 
 const botLink = "https://t.me/ILCOIN_Earn_bot/ilcoin?startapp=";
 
+
+function showToast(icon, title) {
+  Swal.fire({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    icon: icon,
+    title: title,
+  });
+}
+
 if (window.Telegram && window.Telegram.WebApp) {
   const TELEGRAM = window.Telegram.WebApp;
   console.log(TELEGRAM.initData.start_param);
@@ -148,22 +161,46 @@ watchAddBtn.addEventListener('click', async () => {
   }
 
   if (adData.count >= maxAdsPerDay) {
+    showToast('error', 'No ads any more for today!');
     console.log('error', 'No ads any more for today!');
     return;
   }
-  watchAddBtn.textContent = `...`
+  watchAddBtn.innerHTML = `<img src="./img/promiseGif.gif" alt="">`;
   await AdController.show()
     .then((result) => {
-      console.log(`${adsgramReward} coin added`);
+      showToast('success', `${adsgramReward} coin added`);
       adData.count += 1;
-      watchAddBtn.innerHTML = `<span>Watch</span> <img src="./img/see.png" alt="">`
+      //disable and countdown
+      setTimeout (function(){
+        watchAddBtn.disabled = null;
+      },3000);
+
+      var countdownNum = 30;
+      incTimer();
+
+      function incTimer(){
+        watchAddBtn.disabled = true;
+        setTimeout (function(){
+          if(countdownNum != 0){
+          countdownNum--;
+          watchAddBtn.innerHTML = `00:${(countdownNum>=10)? countdownNum : `${"0"+countdownNum}`}`;
+          incTimer();
+          } else {
+            watchAddBtn.innerHTML = `<span>Watch</span> <img src="./img/see.png" alt="">`;
+            watchAddBtn.disabled = false;
+          }
+        },1000);
+      };
+
       setAdData(adData);
       updateWatchCount();
     })
     .catch((result) => {
-      console.log('error', 'No ads available!');
-      watchAddBtn.innerHTML = `<span>Watch</span> <img src="./img/see.png" alt="">`
+      showToast('error', result.description);
+      watchAddBtn.innerHTML = `<span>Watch</span> <img src="./img/see.png" alt="">`;
+
     });
+    
 });
 ////////////////////////////////////////////////////////////
 
@@ -229,7 +266,7 @@ function drawSector(sector, i) {
 }
 function rotate() {
   const sector = sectors[getIndex()];
-  // console.log( `rotate(${ang - PI / 2}rad)`);
+  console.log(angVel);
   ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`;
   EL_spin.textContent = !angVel ? "SPIN" : sector.label;
   EL_spin.style.background = sector.color;
