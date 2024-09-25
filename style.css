@@ -209,7 +209,8 @@ body {
     opacity: 0.5;
 }
 
-#watchAddBtn{
+#watchAddBtn, 
+#open_Wheel_btn{
     /* padding: 0 20px; */
     border-radius: 6px;
     background-color: #000000;
@@ -226,11 +227,13 @@ body {
     justify-content: center;
     gap:7px;
 }
-#watchAddBtn img {
+#watchAddBtn img,
+#open_Wheel_btn img {
     height:4dvh;
 }
 
-#watchAddBtn:hover
+#watchAddBtn:hover,
+#open_Wheel_btn:hover
  {
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
@@ -239,7 +242,8 @@ body {
     transition: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-#watchAddBtn:active {
+#watchAddBtn:active,
+#open_Wheel_btn:active {
     transform: scale(0.9);
 }
 
@@ -309,6 +313,70 @@ body {
     font-size:1.5rem;
     display:none;
 }
+/* LUCKY WHEEL */
+.wheel_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 100dvh;
+    width:100%;
+    background: #000000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display:none;
+}
+#wheel_back_btn {
+    color:white;
+    position:absolute;
+    top:10px;
+    left:10px;
+}
+#wheel_back_btn img {
+    height:8dvh;
+}
+#wheelOfFortune {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+#wheel {
+    display: block;
+}
+
+#spin {
+    font: 1.5em/0 sans-serif;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+    height: 30%;
+    margin: -15%;
+    background: #fff;
+    color: black;
+    box-shadow: 0 0 0 8px currentColor, 0 0px 15px 5px rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    transition: 0.8s;
+}
+
+#spin::after {
+    content: "";
+    position: absolute;
+    top: -17px;
+    border: 10px solid transparent;
+    border-bottom-color: currentColor;
+    border-top: none;
+}
+
+
 @media (max-width:670px) {
 
     .card,
@@ -334,13 +402,15 @@ body {
         height:6.5dvh
     }
     #shareRefLink, 
-    #watchAddBtn {
+    #watchAddBtn,
+    #open_Wheel_btn {
         font-size:1.8dvh;
     }
     #shareRefLink img {
         height:3dvh;
     }
-    #watchAddBtn img {
+    #watchAddBtn img,
+    #open_Wheel_btn img {
         height:3dvh;
     }
     .user .username img,
@@ -364,13 +434,15 @@ body {
 }
 @media (max-width:340px) {
     #shareRefLink,
-    #watchAddBtn {
+    #watchAddBtn,
+    #open_Wheel_btn {
         font-size:1.6dvh;
     }
     #shareRefLink img {
         height:2.5dvh;
     }
-    #watchAddBtn img {
+    #watchAddBtn img,
+    #open_Wheel_btn img {
         height:2.5dvh;
     }
     .user .username img, 
