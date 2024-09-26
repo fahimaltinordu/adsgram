@@ -237,7 +237,7 @@ function generateRandom(min, max) {
 }
 
 var landOn = generateRandom(0, 5);
-console.log("ILK sonuç: "+landOn)
+// console.log("ILK sonuç: "+landOn)
 
 const baseDegree = 360 * 7;
 const spinAniTime = 6000;
@@ -270,7 +270,6 @@ function spanWheel(_landOn) {
 
   let spinReward = "";
   setTimeout(() => {
-    console.log("switchin içi: "+_landOn);
     switch (_landOn){ 
       case 0: spinReward = "1 ticket"; 
       break; 
@@ -288,12 +287,11 @@ function spanWheel(_landOn) {
       break; 
     }
     showClaim(spinReward);
-    console.log(spinReward);
-    console.log("SONUÇ: ", _landOn);
+
   }, spinAniTime + 500);
 
   landOn = generateRandom(0, 5);
-  console.log("yeni sonuç: "+landOn)
+  // console.log("yeni sonuç: "+landOn)
 }
 
 function getRandomIntBetween(min, max) {
