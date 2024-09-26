@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="js/webApp.js"></script>
     <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     <title>ILCOIN Earn 🪙</title>
@@ -19,9 +20,24 @@
             <img src="./img/ticket.png" alt="">
             <span>2</span>
         </div>
-        <div id="wheelOfFortune">
-            <canvas id="wheel" width="300" height="300"></canvas>
-            <div id="spin">SPIN</div>
+        <div id="wrapper">      
+            <div id="wheel">
+              <div id="inner-wheel">
+                <div class="sec"><span>1 ticket</span></div>
+                <div class="sec"><span >+100 coin</span></div>
+                <div class="sec"><span >+10 coin</span></div>
+                <div class="sec"><span >No reward</span></div>
+                <div class="sec"><span >10 TON</span></div>
+                <div class="sec"><span >No reward</span></div>
+              </div>
+      
+              <div id="spin">
+                <div id="inner-spin"></div>
+              </div>
+      
+              <div id="shine"></div>
+            </div>
+      
         </div>
         
     </div>

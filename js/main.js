@@ -21,6 +21,19 @@ function showToast(icon, title) {
     title: title,
   });
 }
+function showClaim(_title) {
+  Swal.fire({
+    title: _title,
+    confirmButtonText: "Claim",
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire("Saved!", "", "success");
+    } else if (result.isDenied) {
+      Swal.fire("Changes are not saved", "", "info");
+    }
+  });
+}
 
 if (window.Telegram && window.Telegram.WebApp) {
   const TELEGRAM = window.Telegram.WebApp;
@@ -216,81 +229,77 @@ open_Wheel_btn.addEventListener("click", ()=> {
   wheel_cont.style.display="flex";
 });
 
-const sectors = [
-  { color: "#f82", label: "Stack" },
-  { color: "#0bf", label: "Stack" },
-  { color: "#fb0", label: "1 ILC" },
-  { color: "#0fb", label: "Stack" },
-  { color: "#b0f", label: "0.1 ILC" },
-  { color: "#f0b", label: "1 ticket" },
-  { color: "#bf0", label: "0.2 ILC" },
-];
-const rand = (m, M) => Math.random() * (M - m) + m;
-const EL_spin = document.querySelector("#spin");
-const tot = sectors.length;
-const dia = 350;
-const rad = dia / 2;
-const PI = Math.PI;
-const TAU = 2 * PI;
-console.log("TAU", TAU);
-const arc = TAU / sectors.length;
-console.log("arc", arc);
-const canvas = document.getElementById("wheel");
-const ctx = canvas.getContext("2d");
-canvas.width = dia;
-canvas.height = dia;
+const wheelSectionTotal = 6;
 
-const friction = 0.991; // 0.995=soft, 0.99=mid, 0.98=hard
-let angVel = 0; // Angular velocity
-let ang = 0; // Angle in radians
-const getIndex = () => Math.floor(tot - (ang / TAU) * tot) % tot;
-function drawSector(sector, i) {
-  const ang = arc * i;
-  ctx.save();
-  // COLOR
-  ctx.beginPath();
-  ctx.fillStyle = sector.color;
-  ctx.moveTo(rad, rad);
-  ctx.arc(rad, rad, rad, ang, ang + arc);
-  ctx.lineTo(rad, rad);
-  ctx.fill();
-  // TEXT
-  ctx.translate(rad, rad);
-  ctx.rotate(ang + arc / 2);
-  ctx.textAlign = "right";
-  ctx.fillStyle = "#fff";
-  ctx.font = "bold 30px sans-serif";
-  ctx.fillText(sector.label, rad - 10, 10);
-  //
-  ctx.restore();
+function generateRandom(min, max) {
+    var num = Math.floor(Math.random() * (max - min + 1)) + min;
+    return (num === 4) ? generateRandom(min, max) : num;
 }
-function rotate() {
-  const sector = sectors[getIndex()];
-  console.log(angVel);
-  ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`;
-  EL_spin.textContent = !angVel ? "SPIN" : sector.label;
-  EL_spin.style.background = sector.color;
-  console.log(`RESULT : ${sector.label}`);
-}
-function frame() {
-  if (!angVel) return;
-  angVel *= friction; // Decrement velocity by friction
-  if (angVel < 0.002) angVel = 0; // Bring to stop
-  ang += angVel; // Update angle
-  ang %= TAU; // Normalize angle
-  rotate();
-}
-function engine() {
-  frame();
-  requestAnimationFrame(engine);
-}
-// INIT
-sectors.forEach(drawSector);
-rotate(); // Initial rotation
-engine(); // Start engine
-EL_spin.addEventListener("click", () => {
-  if (!angVel) angVel = rand(0.25, 0.35);
+
+var landOn = generateRandom(0, 5);
+console.log("ILK sonuç: "+landOn)
+
+const baseDegree = 360 * 7;
+const spinAniTime = 6000;
+
+var nowDegree = 0;
+const sectionDegree = 360 / wheelSectionTotal;
+
+$(document).ready(function () {
+  /*WHEEL SPIN FUNCTION*/
+  $("#spin").click(function () {
+    spanWheel(landOn);
+  });
 });
+
+function spanWheel(_landOn) {
+  var newBaseDegree = baseDegree + nowDegree - ((baseDegree + nowDegree) % 360);
+  var landOnDegreeCenter = sectionDegree * _landOn;
+  var landOnDegreeOffset = getRandomIntBetween(
+    landOnDegreeCenter - (sectionDegree / 2) * 0.9,
+    landOnDegreeCenter + (sectionDegree / 2) * 0
+  );
+  var landOnDegree = 360 - landOnDegreeOffset;
+
+  var totalDegree = newBaseDegree + landOnDegree;
+  nowDegree = totalDegree;
+
+  $("#inner-wheel").css({
+    transform: "rotate(" + totalDegree + "deg)",
+  });
+
+  let spinReward = "";
+  setTimeout(() => {
+    console.log("switchin içi: "+_landOn);
+    switch (_landOn){ 
+      case 0: spinReward = "1 ticket"; 
+      break; 
+      case 1: spinReward = "100 coin"; 
+      break; 
+      case 2: spinReward = "10 coin"; 
+      break; 
+      case 3: spinReward = "No luck"; 
+      break; 
+      case 4: spinReward = "10 TON"; 
+      break; 
+      case 5: spinReward = "No luck"; 
+      break; 
+      default: spinReward = "No luck"; 
+      break; 
+    }
+    showClaim(spinReward);
+    console.log(spinReward);
+    console.log("SONUÇ: ", _landOn);
+  }, spinAniTime + 500);
+
+  landOn = generateRandom(0, 5);
+  console.log("yeni sonuç: "+landOn)
+}
+
+function getRandomIntBetween(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
 
 
 
