@@ -416,11 +416,13 @@ body {
     border-width: 130px 75px 0;
     border-color: #19c transparent;
     transform-origin: 75px 129px;
-    left: 50px;
-    top: -4px;
+    left: 43px;
+    top: -10px;
     opacity: 1;
   }
-  
+  #wheel div.sec span img {
+    width:40px;
+  }
   #wheel div.sec:nth-child(1) {
     transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
