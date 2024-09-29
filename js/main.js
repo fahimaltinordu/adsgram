@@ -3,7 +3,6 @@ const playerName = document.querySelector('.player__name');
 const playerUserId = document.querySelector('.player__userId');
 const noMobileElement = document.querySelector('.noMobile');
 const adsenseBtn = document.querySelector("#adsenseBtn");
-const placementStart = document.querySelector("#placementStart");
 // const referralURL = document.querySelector('#ref_link');
 // const inviteCount = document.querySelector("#invite_count");
 const shareBtn = document.querySelector('#shareRefLink');
@@ -18,7 +17,7 @@ function showToast(icon, title) {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 2000,
+    timer: 2500,
     timerProgressBar: true,
     icon: icon,
     title: title,
@@ -39,57 +38,66 @@ function showClaim(_title) {
 }
 
 //ADSENSE 
-let intervalId;
-intervalId = setInterval(()=>{
-  if(placementStart.style.display="none"){
-    placementStart.style.display="flex";
-  }
-},30*1000); 
-
 
 adConfig({
     preloadAdBreaks: "on",
     sound: 'off',
     onReady: () => {
-        // adsenseBtn.style.display="flex";
-        placementStart.style.display="flex";
+        adsenseBtn.style.display="flex";
     },
 });
 
-placementStart.addEventListener("click", ()=> {
-    adBreak({
-        type: "start",
-        name: "earn-0.1-ilc",
-        adBreakDone: (placementInfo) => { 
-            console.log(`breakStatus: ${placementInfo.breakStatus}`);
-            //breakStatus: 'notReady|timeout|error|noAdPreloaded|frequencyCapped|ignored|other|dismissed|viewed',
-            switch (placementInfo.breakStatus) {
-                case "viewed": 
-                showToast( null, `Congratulations, +0.1 ILC added`);
-                break;
-                case "notReady": 
-                showToast(null, `Ad is not ready`);
-                break;
-                case "noAdPreloaded": 
-                showToast(null, `No ad available at this time`);
-                break;
-                case "frequencyCapped": 
-                showToast(null, `Frequency Capped!`);
-                break;
-                case "ignored": 
-                case "other": 
-                case "dismissed": 
-                case "timeout": 
-                case "error": 
-                showToast(null, `Error occured, status: ${placementInfo.breakStatus}`);
-                break;
+adsenseBtn.addEventListener("click", ()=> {
+  adBreak({
+      type: 'reward',                      // The type of this placement
+      name: '1 extra ticket',              // A descriptive name for this placement
+      beforeAd: () => {},                  // Prepare for the ad. Mute and pause the game flow
+      afterAd: () => {},                   // Resume the game and re-enable sound
+      // Show reward prompt (call showAdFn() if clicked)
+      beforeReward: (showAdFn) => {
+        Swal.fire({
+            title: "Watch the video to get one more chance?",
+            showCancelButton: true,
+            confirmButtonText: "Watch",
+        }).then((result) => {
+            if (result.isConfirmed) {
+              showAdFn(); //ads
             }
-            placementStart.style.display="none";
-            
+        });
+      },
+      // Player dismissed the ad before it finished.      
+      adDismissed: () => {},  
+      // Player watched the ad–give them the reward.             
+      adViewed: () => {},
+      
+      // Always called (if provided) even if an ad didn't show  
+      adBreakDone: (placementInfo) => {
+          //breakStatus: 'notReady|timeout|error|noAdPreloaded|frequencyCapped|ignored|other|dismissed|viewed',
+          switch (placementInfo.breakStatus) {
+            case "viewed": 
+            showToast( "success", `Congratulations, +0.1 ILC added`);
+            break;
+            case "notReady": 
+            showToast("error", `Ad is not ready`);
+            break;
+            case "noAdPreloaded": 
+            showToast("error", `No ad available at this time`);
+            break;
+            case "frequencyCapped": 
+            showToast("error", `Frequency Capped!`);
+            break;
+            case "ignored": 
+            case "other": 
+            case "dismissed": 
+            case "timeout": 
+            case "error": 
+            showToast("error", `Error occured, status: ${placementInfo.breakStatus}`);
+            break;
         }
-    });
-});
+      },  
+  });
 
+});
 
 
 
@@ -356,17 +364,3 @@ function getRandomIntBetween(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-
-
-
-// if(TELEGRAM.platform === "android") {
-//   document.querySelector(".noMobile").style.display = "none";
-// }else if(TELEGRAM.platform === "ios") {
-//   document.querySelector(".noMobile").style.display = "none";
-// }else if(TELEGRAM.platform === "weba") {
-//   document.querySelector(".noMobile").style.display = "flex";
-// }else if(TELEGRAM.platform === "unknown") { //normal browser
-//   document.querySelector(".noMobile").style.display = "none";
-// }else {
-//   document.querySelector(".noMobile").style.display = "flex";
-// }

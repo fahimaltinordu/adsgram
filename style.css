@@ -13,6 +13,9 @@
 div:where(.swal2-container).swal2-top, div:where(.swal2-container).swal2-center, div:where(.swal2-container).swal2-bottom {
     z-index: 9999999999999;
 }
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
+  background-color: #008b6a;
+}
 body {
     background-color: black;
     display: flex;
@@ -111,8 +114,7 @@ body {
   bottom:50px;
   padding: 10px;
 }
-.admob #adsenseBtn,
-.admob #placementStart {
+.admob #adsenseBtn {
   cursor:pointer;
   background:transparent;
   align-items:center;
