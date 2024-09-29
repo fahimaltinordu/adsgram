@@ -102,6 +102,26 @@ body {
     top:0;
     left:0;
 } */
+.admob {
+  width:70%;
+  display:flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap:15px;
+  bottom:50px;
+  padding: 10px;
+}
+.admob #adsenseBtn,
+.admob #placementStart {
+  cursor:pointer;
+  background:transparent;
+  align-items:center;
+  justify-content: center;
+  display:none;
+}
+.admob img {
+  height:7dvh;
+}
 #shareRefLink {
     background-color: #000000;
     border-radius: 6px;
@@ -117,17 +137,20 @@ body {
     font-weight:700;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
 }
-#shareRefLink:active {
+#shareRefLink:active,
+.admob button:active {
     transform: scale(0.9);
 }
-#shareRefLink {
+#shareRefLink,
+.admob button {
     animation: pulse 1.5s infinite;
     -webkit-animation: pulse 1.5s infinite;
 }
-#shareRefLink:hover {
+#shareRefLink:hover,
+.admob button:hover {
     animation: none;
     -webkit-animation: none;
-  }
+}
   @keyframes pulse {
     0% {
       -moz-transform: scale(0.9);
@@ -334,7 +357,7 @@ body {
     top: 0;
     left: 0;
     z-index: 9999;
-    /* display:none; */
+    display:none;
 }
 #wheel_back_btn {
     color:white;
@@ -716,7 +739,8 @@ body {
     .card2,
     .panel,
     .panel2,
-    .user {
+    .user,
+    .admob {
         width: 90%;
     }
     .user {
@@ -731,7 +755,9 @@ body {
     .card2 .description span {
         font-size: 0.9rem;
     }
-    .card img, .card2 img {
+    .card img, 
+    .card2 img,
+    .admob img {
         height:6.5dvh
     }
     #shareRefLink, 
@@ -782,7 +808,9 @@ body {
     .user .userid img {
         height:2.5dvh;
     }
-    .card img, .card2 img {
+    .card img, 
+    .card2 img,
+    .admob img {
         height:4dvh
     }
     .balance img{
