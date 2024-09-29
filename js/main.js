@@ -2,6 +2,8 @@
 const playerName = document.querySelector('.player__name');
 const playerUserId = document.querySelector('.player__userId');
 const noMobileElement = document.querySelector('.noMobile');
+const adsenseBtn = document.querySelector("#adsenseBtn");
+const placementStart = document.querySelector("#placementStart");
 // const referralURL = document.querySelector('#ref_link');
 // const inviteCount = document.querySelector("#invite_count");
 const shareBtn = document.querySelector('#shareRefLink');
@@ -10,6 +12,7 @@ const shareBtn = document.querySelector('#shareRefLink');
 const botLink = "https://t.me/ILCOIN_Earn_bot/ilcoin?startapp=";
 
 
+//SWAL ALERT
 function showToast(icon, title) {
   Swal.fire({
     toast: true,
@@ -34,6 +37,61 @@ function showClaim(_title) {
     }
   });
 }
+
+//ADSENSE 
+let intervalId;
+intervalId = setInterval(()=>{
+  if(placementStart.style.display="none"){
+    placementStart.style.display="flex";
+  }
+},30*1000); 
+
+
+adConfig({
+    preloadAdBreaks: "on",
+    sound: 'off',
+    onReady: () => {
+        // adsenseBtn.style.display="flex";
+        placementStart.style.display="flex";
+    },
+});
+
+placementStart.addEventListener("click", ()=> {
+    adBreak({
+        type: "start",
+        name: "earn-0.1-ilc",
+        adBreakDone: (placementInfo) => { 
+            console.log(`breakStatus: ${placementInfo.breakStatus}`);
+            //breakStatus: 'notReady|timeout|error|noAdPreloaded|frequencyCapped|ignored|other|dismissed|viewed',
+            switch (placementInfo.breakStatus) {
+                case "viewed": 
+                showToast( null, `Congratulations, +0.1 ILC added`);
+                break;
+                case "notReady": 
+                showToast(null, `Ad is not ready`);
+                break;
+                case "noAdPreloaded": 
+                showToast(null, `No ad available at this time`);
+                break;
+                case "frequencyCapped": 
+                showToast(null, `Frequency Capped!`);
+                break;
+                case "ignored": 
+                case "other": 
+                case "dismissed": 
+                case "timeout": 
+                case "error": 
+                showToast(null, `Error occured, status: ${placementInfo.breakStatus}`);
+                break;
+            }
+            placementStart.style.display="none";
+            
+        }
+    });
+});
+
+
+
 
 if (window.Telegram && window.Telegram.WebApp) {
   const TELEGRAM = window.Telegram.WebApp;
@@ -145,7 +203,7 @@ const watchAddBtn = document.querySelector('#watchAddBtn');
 const $watchCount = document
   .querySelector('.earn__item__watch-count')
   .querySelector('span');
-const maxAdsPerDay = 20;
+const maxAdsPerDay = 10;
 const currentDate = new Date().toISOString().slice(0, 10);
 
 function updateWatchCount() {
