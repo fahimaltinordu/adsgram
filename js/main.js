@@ -15,12 +15,15 @@ const botLink = "https://t.me/ILCOIN_Earn_bot/ilcoin?startapp=";
 
 
 //CATEGORIES
+function renderMissions() {
+  document.querySelector(".cards2").style.display="flex";
+  document.querySelector(".missionsCont").style.display="none";
+  document.querySelector(".cards").style.display="none";
+  document.querySelector(".cards3").style.display="none";
+}
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
-  document.querySelector(".missionsCont").style.display="none";
-  document.querySelector(".cards").style.display="flex";
-  document.querySelector(".cards2").style.display="flex";
-  document.querySelector(".cards3").style.display="none";
+  renderMissions();
 });
  
 mineTabButtons.forEach((mineTabButton) => {
@@ -34,14 +37,11 @@ mineTabButtons.forEach((mineTabButton) => {
 
     switch (category) {
       case "Static":
-      document.querySelector(".missionsCont").style.display="none";
-      document.querySelector(".cards").style.display="flex";
-      document.querySelector(".cards2").style.display="flex";
-      document.querySelector(".cards3").style.display="none";
+      renderMissions();
       break;
       case "Daily":
       document.querySelector(".missionsCont").style.display="flex";
-      document.querySelector(".cards").style.display="none";
+      document.querySelector(".cards").style.display="flex";
       document.querySelector(".cards2").style.display="none";
       document.querySelector(".cards3").style.display="none";
       break;
