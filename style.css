@@ -123,16 +123,16 @@ hr {
     left:0;
 } */
 .admob {
-  width:70%;
+  /* width:70%; */
   display: flex;
   align-items: flex-end;
   justify-content: center;
   flex-direction: column;
-  gap:15px;
-  bottom:50px;
+  gap:2px;
+  /* bottom:50px; */
   padding: 10px;
   position: absolute;
-  bottom: 5px;
+  right: 10px;
 }
 .admob #adsenseBtn {
   cursor:pointer;
@@ -143,6 +143,7 @@ hr {
 }
 .admob img {
   height:7dvh;
+  filter: drop-shadow(0 0 0.1rem #ffffff);
 }
 #shareRefLink {
     background-color: #000000;
@@ -356,7 +357,7 @@ hr {
     height:10dvh;
 }
 .balance h1{
-    font-size:7dvh;
+    font-size:6dvh;
 }
 .noMobile {
     position:absolute;
@@ -381,16 +382,16 @@ hr {
   border-radius: 10px;
   background-color: #000000;
   padding: 5px;
-  /* margin-top: 10px; */
-  height:55px;
+  height:8dvh;
   width:70%;
 }
 
 .mine-tab__tabs .mine-tab__btn {
   background-color: transparent;
   border-radius: 10px;
-  font-size: 1rem;
-  padding: 10px 15px;
+  height:80%;
+  font-size: 1.7rem;
+  padding: 5px 15px;
   color: #8b8e93;
   font-weight:700;
   cursor: pointer;
@@ -399,7 +400,7 @@ hr {
 .mine-tab__tabs .mine-tab__btn.mine-tab__btn__active {
   color: white;
   background: rgb(86,250,173);
-background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100%, rgba(97,246,178,1) 100%);
+  background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100%, rgba(97,246,178,1) 100%);
 }
 
 /* LUCKY WHEEL */
@@ -801,7 +802,7 @@ background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100
     .panel,
     .panel2,
     .user,
-    .admob,
+    /* .admob, */
     .missions,
     .mine-tab__tabs {
         width: 90%;
@@ -822,9 +823,11 @@ background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100
     }
     .card img, 
     .card2 img,
-    .admob img,
     .missionImg img {
         height:6.5dvh
+    }
+    .admob img {
+        height:4.5dvh
     }
     #shareRefLink, 
     #watchAddBtn,
@@ -879,9 +882,11 @@ background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100
     }
     .card img, 
     .card2 img,
-    .admob img,
     .missionImg img{
         height:4dvh
+    }
+    .admob img {
+      height:3dvh
     }
     .balance img{
         height:6dvh;
