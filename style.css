@@ -383,7 +383,7 @@ hr {
   padding: 5px;
   /* margin-top: 10px; */
   height:55px;
-  width:90%;
+  width:70%;
 }
 
 .mine-tab__tabs .mine-tab__btn {
@@ -802,7 +802,8 @@ background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100
     .panel2,
     .user,
     .admob,
-    .missions {
+    .missions,
+    .mine-tab__tabs {
         width: 90%;
     }
     .user,
@@ -829,6 +830,7 @@ background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100
     #watchAddBtn,
     #open_Wheel_btn,
     .missionCheck button {
+        width:100px;
         font-size:1.8dvh;
     }
     #shareRefLink img {

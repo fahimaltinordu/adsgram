@@ -15,15 +15,32 @@ const botLink = "https://t.me/ILCOIN_Earn_bot/ilcoin?startapp=";
 
 
 //CATEGORIES
-function renderMissions() {
+const tab1 = "Home";
+const tab2 = "Missions";
+const tab3 = "Games";
+
+function renderTab1() {
   document.querySelector(".cards2").style.display="flex";
   document.querySelector(".missionsCont").style.display="none";
   document.querySelector(".cards").style.display="none";
   document.querySelector(".cards3").style.display="none";
 }
+function renderTab2() {
+  document.querySelector(".missionsCont").style.display="flex";
+  document.querySelector(".cards").style.display="flex";
+  document.querySelector(".cards2").style.display="none";
+  document.querySelector(".cards3").style.display="none";
+}
+function renderTab3() {
+  document.querySelector(".missionsCont").style.display="none";
+  document.querySelector(".cards").style.display="none";
+  document.querySelector(".cards2").style.display="none";
+  document.querySelector(".cards3").style.display="flex";
+}
+
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
-  renderMissions();
+  renderTab1();
 });
  
 mineTabButtons.forEach((mineTabButton) => {
@@ -33,27 +50,20 @@ mineTabButtons.forEach((mineTabButton) => {
     });
     e.target.classList.add('mine-tab__btn__active');
     const category = e.target.textContent;
-    console.log(category);
 
     switch (category) {
-      case "Static":
-      renderMissions();
+      case tab1:
+      renderTab1();
       break;
-      case "Daily":
-      document.querySelector(".missionsCont").style.display="flex";
-      document.querySelector(".cards").style.display="flex";
-      document.querySelector(".cards2").style.display="none";
-      document.querySelector(".cards3").style.display="none";
+      case tab2:
+      renderTab2();
       break;
-      case "Games":
-      document.querySelector(".missionsCont").style.display="none";
-      document.querySelector(".cards").style.display="none";
-      document.querySelector(".cards2").style.display="none";
-      document.querySelector(".cards3").style.display="flex";
+      case tab3:
+      renderTab3();
       break;
     
       default:
-        break;
+      break;
     }
   });
 });
