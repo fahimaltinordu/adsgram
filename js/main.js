@@ -3,13 +3,60 @@ const playerName = document.querySelector('.player__name');
 const playerUserId = document.querySelector('.player__userId');
 const noMobileElement = document.querySelector('.noMobile');
 const adsenseBtn = document.querySelector("#adsenseBtn");
+const adTimer = document.querySelector('#adTimer');
 // const referralURL = document.querySelector('#ref_link');
 // const inviteCount = document.querySelector("#invite_count");
 const shareBtn = document.querySelector('#shareRefLink');
+const invited_by_dom = document.querySelector('#invited_by');
+const mineTabButtons = document.querySelectorAll('.mine-tab__btn');
 // const copyBtn = document.querySelector('#copyLink')
 
 const botLink = "https://t.me/ILCOIN_Earn_bot/ilcoin?startapp=";
 
+
+//CATEGORIES
+document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
+  document.querySelector(".missionsCont").style.display="none";
+  document.querySelector(".cards").style.display="flex";
+  document.querySelector(".cards2").style.display="flex";
+  document.querySelector(".cards3").style.display="none";
+});
+ 
+mineTabButtons.forEach((mineTabButton) => {
+  mineTabButton.addEventListener('click', (e) => {
+    mineTabButtons.forEach((mineTabButton) => {
+      mineTabButton.classList.remove('mine-tab__btn__active');
+    });
+    e.target.classList.add('mine-tab__btn__active');
+    const category = e.target.textContent;
+    console.log(category);
+
+    switch (category) {
+      case "Static":
+      document.querySelector(".missionsCont").style.display="none";
+      document.querySelector(".cards").style.display="flex";
+      document.querySelector(".cards2").style.display="flex";
+      document.querySelector(".cards3").style.display="none";
+      break;
+      case "Daily":
+      document.querySelector(".missionsCont").style.display="flex";
+      document.querySelector(".cards").style.display="none";
+      document.querySelector(".cards2").style.display="none";
+      document.querySelector(".cards3").style.display="none";
+      break;
+      case "Games":
+      document.querySelector(".missionsCont").style.display="none";
+      document.querySelector(".cards").style.display="none";
+      document.querySelector(".cards2").style.display="none";
+      document.querySelector(".cards3").style.display="flex";
+      break;
+    
+      default:
+        break;
+    }
+  });
+});
 
 //SWAL ALERT
 function showToast(icon, title) {
@@ -25,6 +72,8 @@ function showToast(icon, title) {
 }
 function showClaim(_title) {
   Swal.fire({
+    allowOutsideClick: false,
+    allowEscapeKey: false,
     title: _title,
     confirmButtonText: "Claim",
   }).then((result) => {
@@ -40,62 +89,101 @@ function showClaim(_title) {
 //ADSENSE 
 
 adConfig({
-    preloadAdBreaks: "on",
-    sound: 'off',
-    onReady: () => {
-        adsenseBtn.style.display="flex";
-    },
+  preloadAdBreaks: "on",
+  sound: 'off',
+  onReady: () => {
+    adsenseBtn.style.display = "flex";
+  },
 });
 
-adsenseBtn.addEventListener("click", ()=> {
-  adBreak({
+var adSaveReady = true;
+var adSaveINT = 15;
+//Allows Rewarded Ad to Be Called Once Again...
+function restoreAdSave(){
+  if (!adSaveReady){
+    adSaveReady = true;
+  }
+}
+let myTimeout;
+function AdTimer() {
+  adsenseBtn.disabled = true;
+  myTimeout = setTimeout(function () {
+    if (adSaveINT != 0) {
+      adSaveINT--;
+      adTimer.innerHTML = `00:${(adSaveINT >= 10) ? adSaveINT : `${"0" + adSaveINT}`}`;
+      AdTimer();
+    } else {
+      restoreAdSave()
+      adTimer.innerHTML = `Open Box`;
+      adsenseBtn.disabled = false;
+    }
+  }, 1000);
+  // clearTimeout(myTimeout);
+  
+};
+adsenseBtn.addEventListener("click", () => {
+  console.log(adSaveReady)
+  if(adSaveReady==true) {
+    adBreak({
       type: 'reward',                      // The type of this placement
       name: '1 extra ticket',              // A descriptive name for this placement
-      beforeAd: () => {},                  // Prepare for the ad. Mute and pause the game flow
-      afterAd: () => {},                   // Resume the game and re-enable sound
+      beforeAd: () => { },                  // Prepare for the ad. Mute and pause the game flow
+      afterAd: () => { },                   // Resume the game and re-enable sound
       // Show reward prompt (call showAdFn() if clicked)
       beforeReward: (showAdFn) => {
         Swal.fire({
-            title: "Watch the video to get one more chance?",
-            showCancelButton: true,
-            confirmButtonText: "Watch",
+          title: "Watch the video to get one more chance?",
+          showCancelButton: true,
+          confirmButtonText: "Watch",
         }).then((result) => {
-            if (result.isConfirmed) {
-              showAdFn(); //ads
-            }
+          if (result.isConfirmed) {
+            showAdFn(); //ads
+          } else {
+            adSaveReady = false;
+            AdTimer();
+          }
         });
       },
       // Player dismissed the ad before it finished.      
-      adDismissed: () => {},  
+      adDismissed: () => { },
       // Player watched the ad–give them the reward.             
-      adViewed: () => {},
-      
+      adViewed: () => { },
+  
       // Always called (if provided) even if an ad didn't show  
       adBreakDone: (placementInfo) => {
-          //breakStatus: 'notReady|timeout|error|noAdPreloaded|frequencyCapped|ignored|other|dismissed|viewed',
-          switch (placementInfo.breakStatus) {
-            case "viewed": 
-            showToast( "success", `Congratulations, +0.1 ILC added`);
+        //breakStatus: 'notReady|timeout|error|noAdPreloaded|frequencyCapped|ignored|other|dismissed|viewed',
+        switch (placementInfo.breakStatus) {
+          case "viewed":
+            showToast("success", `Congratulations, +0.1 ILC added`);
             break;
-            case "notReady": 
+          case "notReady":
             showToast("error", `Ad is not ready`);
             break;
-            case "noAdPreloaded": 
+          case "noAdPreloaded":
             showToast("error", `No ad available at this time`);
             break;
-            case "frequencyCapped": 
+          case "frequencyCapped":
             showToast("error", `Frequency Capped!`);
             break;
-            case "ignored": 
-            case "other": 
-            case "dismissed": 
-            case "timeout": 
-            case "error": 
+          case "ignored":
+          case "other":
+          case "dismissed":
+          case "timeout":
+          case "error":
             showToast("error", `Error occured, status: ${placementInfo.breakStatus}`);
             break;
+          default: showToast("error", `Unknown break status`);
+            break;
         }
-      },  
-  });
+        adSaveReady = false;
+        // window.setTimeout(restoreAdSave, adSaveINT);
+        AdTimer();
+      },
+    });
+  }
+  else{
+    showToast("error", "Wait some time")
+  }
 
 });
 
@@ -109,6 +197,7 @@ if (window.Telegram && window.Telegram.WebApp) {
   TELEGRAM.enableClosingConfirmation();
   TELEGRAM.setHeaderColor('#000000');
   TELEGRAM.expand();
+  
 
   //only mobile
   switch (TELEGRAM.platform) {
@@ -124,14 +213,18 @@ if (window.Telegram && window.Telegram.WebApp) {
 
   let url_tier = "";
   //assign user data
-  const user = TELEGRAM.initDataUnsafe.user;
+  const WebAppInitData = TELEGRAM.initDataUnsafe;
+  const referred_ID = WebAppInitData.start_param;
+  const user = WebAppInitData.user;
   if (user) {
+    invited_by_dom.textContent = referred_ID === undefined ? `You have joined without ref` : `You invited by ${referred_ID}`;
     playerName.textContent = `${user.first_name}`;
     playerUserId.textContent = `${user.id}`;
     url_tier = user.id;
   } else {
     playerName.textContent = `No user`;
     playerUserId.textContent = `No ID`;
+    invited_by_dom.textContent = `You have joined without ref`;
   }
 
   //referral
@@ -250,25 +343,25 @@ watchAddBtn.addEventListener('click', async () => {
       showToast('success', `${adsgramReward} coin added`);
       adData.count += 1;
       //disable and countdown
-      setTimeout (function(){
+      setTimeout(function () {
         watchAddBtn.disabled = null;
-      },30000);
+      }, 30000);
 
       var countdownNum = 30;
       incTimer();
 
-      function incTimer(){
+      function incTimer() {
         watchAddBtn.disabled = true;
-        setTimeout (function(){
-          if(countdownNum != 0){
-          countdownNum--;
-          watchAddBtn.innerHTML = `00:${(countdownNum>=10)? countdownNum : `${"0"+countdownNum}`}`;
-          incTimer();
+        setTimeout(function () {
+          if (countdownNum != 0) {
+            countdownNum--;
+            watchAddBtn.innerHTML = `00:${(countdownNum >= 10) ? countdownNum : `${"0" + countdownNum}`}`;
+            incTimer();
           } else {
             watchAddBtn.innerHTML = `<span>Watch</span> <img src="./img/see.png" alt="">`;
             watchAddBtn.disabled = false;
           }
-        },1000);
+        }, 1000);
       };
 
       setAdData(adData);
@@ -279,27 +372,27 @@ watchAddBtn.addEventListener('click', async () => {
       watchAddBtn.innerHTML = `<span>Watch</span> <img src="./img/see.png" alt="">`;
 
     });
-    
+
 });
 ////////////////////////////////////////////////////////////
 
 //WHEEL
 const wheel_back_btn = document.querySelector("#wheel_back_btn");
 const open_Wheel_btn = document.querySelector("#open_Wheel_btn");
-wheel_back_btn.addEventListener("click", ()=> {
+wheel_back_btn.addEventListener("click", () => {
   const wheel_cont = document.querySelector(".wheel_cont");
-  wheel_cont.style.display="none";
+  wheel_cont.style.display = "none";
 });
-open_Wheel_btn.addEventListener("click", ()=> {
+open_Wheel_btn.addEventListener("click", () => {
   const wheel_cont = document.querySelector(".wheel_cont");
-  wheel_cont.style.display="flex";
+  wheel_cont.style.display = "flex";
 });
 
 const wheelSectionTotal = 6;
 
 function generateRandom(min, max) {
-    var num = Math.floor(Math.random() * (max - min + 1)) + min;
-    return (num === 4) ? generateRandom(min, max) : num;
+  var num = Math.floor(Math.random() * (max - min + 1)) + min;
+  return (num === 4) ? generateRandom(min, max) : num;
 }
 
 var landOn = generateRandom(0, 5);
@@ -336,21 +429,21 @@ function spanWheel(_landOn) {
 
   let spinReward = "";
   setTimeout(() => {
-    switch (_landOn){ 
-      case 0: spinReward = "1 ticket"; 
-      break; 
-      case 1: spinReward = "100 coin"; 
-      break; 
-      case 2: spinReward = "10 coin"; 
-      break; 
-      case 3: spinReward = "No luck"; 
-      break; 
-      case 4: spinReward = "10 TON"; 
-      break; 
-      case 5: spinReward = "No luck"; 
-      break; 
-      default: spinReward = "No luck"; 
-      break; 
+    switch (_landOn) {
+      case 0: spinReward = "1 ticket";
+        break;
+      case 1: spinReward = "100 coin";
+        break;
+      case 2: spinReward = "10 coin";
+        break;
+      case 3: spinReward = "No luck";
+        break;
+      case 4: spinReward = "10 TON";
+        break;
+      case 5: spinReward = "No luck";
+        break;
+      default: spinReward = "No luck";
+        break;
     }
     showClaim(spinReward);
 

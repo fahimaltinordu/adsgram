@@ -22,7 +22,16 @@ body {
     justify-content: center;
     height: 100dvh;
 }
-
+hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 96%;               
+  background-color:#008b6a;
+  height: 1px;
+  margin-top:8px;
+  margin-bottom:8px;
+}
 .app_container {
     display: flex;
     align-items: center;
@@ -71,16 +80,24 @@ body {
     top: 9dvh;
     left: 0;
     padding-top: 15px;
+    padding-bottom:15px;
     color:#000000;
+    overflow: auto;
 }
 
 .cards,
-.cards2 {
+.cards2,
+.cards3,
+.missionsCont {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 100%;
+}
+.missionsCont {
+  gap:10px;
+  /* display:none; */
 }
 
 .panel, .panel2 {
@@ -107,12 +124,15 @@ body {
 } */
 .admob {
   width:70%;
-  display:flex;
-  align-items: center;
-  justify-content: flex-end;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-direction: column;
   gap:15px;
   bottom:50px;
   padding: 10px;
+  position: absolute;
+  bottom: 5px;
 }
 .admob #adsenseBtn {
   cursor:pointer;
@@ -190,7 +210,8 @@ body {
 }
 
 .card,
-.card2 {
+.card2,
+.missions {
     background-color: mintcream;
     border: 1px solid #5ff3d0;
     border-radius: 8px;
@@ -208,7 +229,8 @@ body {
 } */
 
 .card img,
-.card2 img {
+.card2 img,
+.missionImg img{
     height: 7dvh;
     filter: drop-shadow(0 0 0.05rem #5ff3d0);
 }
@@ -221,6 +243,9 @@ body {
     justify-content: center;
     font-weight: 700;
 }
+.missionText{
+  font-weight: 700;
+}
 .card .description p,
 .card2 .description p {
     font-size: 1.5rem;
@@ -228,7 +253,8 @@ body {
 }
 
 .card .description > span,
-.card2 .description > span {
+.card2 .description > span,
+.missionText {
     font-size: 1.2rem;
     text-align: center;
     color: #008b6a;
@@ -240,7 +266,8 @@ body {
 }
 
 #watchAddBtn, 
-#open_Wheel_btn{
+#open_Wheel_btn,
+.missionCheck button {
     /* padding: 0 20px; */
     border-radius: 6px;
     background-color: #000000;
@@ -263,7 +290,8 @@ body {
 }
 
 #watchAddBtn:hover,
-#open_Wheel_btn:hover
+#open_Wheel_btn:hover,
+.missionCheck button:hover
  {
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
@@ -273,7 +301,8 @@ body {
 }
 
 #watchAddBtn:active,
-#open_Wheel_btn:active {
+#open_Wheel_btn:active,
+.missionCheck button:active {
     transform: scale(0.9);
 }
 
@@ -343,6 +372,36 @@ body {
     font-size:1.5rem;
     display:none;
 }
+/* CATEGORIES TAB */
+.mine-tab__tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: #000000;
+  padding: 5px;
+  /* margin-top: 10px; */
+  height:55px;
+  width:90%;
+}
+
+.mine-tab__tabs .mine-tab__btn {
+  background-color: transparent;
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 10px 15px;
+  color: #8b8e93;
+  font-weight:700;
+  cursor: pointer;
+}
+
+.mine-tab__tabs .mine-tab__btn.mine-tab__btn__active {
+  color: white;
+  background: rgb(86,250,173);
+background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100%, rgba(97,246,178,1) 100%);
+}
+
 /* LUCKY WHEEL */
 .wheel_cont {
     display: flex;
@@ -742,10 +801,12 @@ body {
     .panel,
     .panel2,
     .user,
-    .admob {
+    .admob,
+    .missions {
         width: 90%;
     }
-    .user {
+    .user,
+    .mine-tab__tabs .mine-tab__btn {
         font-size:0.9rem;
     }
     .card .description p, 
@@ -754,17 +815,20 @@ body {
     }
 
     .card .description span, 
-    .card2 .description span {
+    .card2 .description span,
+    .missionText {
         font-size: 0.9rem;
     }
     .card img, 
     .card2 img,
-    .admob img {
+    .admob img,
+    .missionImg img {
         height:6.5dvh
     }
     #shareRefLink, 
     #watchAddBtn,
-    #open_Wheel_btn {
+    #open_Wheel_btn,
+    .missionCheck button {
         font-size:1.8dvh;
     }
     #shareRefLink img {
@@ -796,7 +860,8 @@ body {
 @media (max-width:340px) {
     #shareRefLink,
     #watchAddBtn,
-    #open_Wheel_btn {
+    #open_Wheel_btn,
+    .missionCheck button {
         font-size:1.6dvh;
     }
     #shareRefLink img {
@@ -812,7 +877,8 @@ body {
     }
     .card img, 
     .card2 img,
-    .admob img {
+    .admob img,
+    .missionImg img{
         height:4dvh
     }
     .balance img{
