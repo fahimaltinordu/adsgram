@@ -426,24 +426,36 @@ hr {
   flex-direction: column;
   width: 70%;
   margin-top:30px;
+  background: #000000;
+  padding: 15px;
+  color:white;
+  border-radius: 15px;
+  gap:10px;
 }
 .farming pre {
   font-size: 0.8rem;
 }
 .farm {
   padding: 10px 20px;
-  width:50%;
+  width:70%;
   height: 10dvh;
   font-size: 1rem;
   font-weight: 700;
   border-radius: 10px;
   cursor: pointer;
   color: white;
-  border:4px solid rgba(98,236,240,1) ;
   background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100%, rgba(97,246,178,1) 100%);
 }
-.farm:active {
+.farm:active,
+.farmBoost button:active {
   transform: scale(0.9);
+}
+.farmBoost button {
+  background: transparent;
+}
+.farmBoost img{
+  height:5dvh;
+  filter: drop-shadow(0.05rem 0.05rem 0.1rem #5ff3d0);
 }
 
 /* LUCKY WHEEL */
