@@ -20,7 +20,8 @@ const tab2 = "Missions";
 const tab3 = "Games";
 
 function renderTab1() {
-  document.querySelector(".cards2").style.display="flex";
+  document.querySelector(".farming").style.display="flex";
+  document.querySelector(".cards2").style.display="none";
   document.querySelector(".missionsCont").style.display="none";
   document.querySelector(".cards").style.display="none";
   document.querySelector(".cards3").style.display="none";
@@ -28,14 +29,16 @@ function renderTab1() {
 function renderTab2() {
   document.querySelector(".missionsCont").style.display="flex";
   document.querySelector(".cards").style.display="flex";
-  document.querySelector(".cards2").style.display="none";
+  document.querySelector(".cards2").style.display="flex";
   document.querySelector(".cards3").style.display="none";
+  document.querySelector(".farming").style.display="none";
 }
 function renderTab3() {
+  document.querySelector(".cards3").style.display="flex";
   document.querySelector(".missionsCont").style.display="none";
   document.querySelector(".cards").style.display="none";
   document.querySelector(".cards2").style.display="none";
-  document.querySelector(".cards3").style.display="flex";
+  document.querySelector(".farming").style.display="none";
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {

@@ -17,7 +17,7 @@ div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
   background-color: #008b6a;
 }
 body {
-    background-color: black;
+    background-color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     height: 100dvh;
@@ -55,7 +55,7 @@ hr {
     justify-content: center;
 }
 
-.footer {
+/* .footer {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -65,11 +65,11 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
 
 .main {
     background-color: #ffffff;
-    height: 85dvh;
+    /* height: 91dvh; */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -416,6 +416,34 @@ hr {
 #updownBtn img,
 #updownBtn1 img {
   height:16px !important
+}
+
+/* FARMING */
+.farming {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 70%;
+  margin-top:30px;
+}
+.farming pre {
+  font-size: 0.8rem;
+}
+.farm {
+  padding: 10px 20px;
+  width:50%;
+  height: 10dvh;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  border:4px solid rgba(98,236,240,1) ;
+  background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100%, rgba(97,246,178,1) 100%);
+}
+.farm:active {
+  transform: scale(0.9);
 }
 
 /* LUCKY WHEEL */
@@ -819,7 +847,8 @@ hr {
     .user,
     /* .admob, */
     .missions,
-    .mine-tab__tabs {
+    .mine-tab__tabs,
+    .farming {
         width: 90%;
     }
     .user,
