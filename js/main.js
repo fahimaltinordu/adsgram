@@ -264,6 +264,7 @@ acc.addEventListener("click", function () {
   let panel = document.querySelector(".panel");
   if (panel.style.display === "flex") {
     panel.style.display = "none";
+    document.querySelector("#updownBtn1").style.transform = "rotate(0deg)"
     document.querySelector(".card").style.borderBottomLeftRadius = "8px";
     document.querySelector(".card").style.borderBottomRightRadius = "8px";
     document.querySelector(".card").style.boxShadow = "0px 1px 6px rgba(95, 243, 208, 0.5)";
@@ -271,6 +272,7 @@ acc.addEventListener("click", function () {
     document.querySelector(".panel").style.borderBottomRightRadius = "0";
   } else {
     panel.style.display = "flex";
+    document.querySelector("#updownBtn1").style.transform = "rotate(180deg)"
     document.querySelector(".card").style.borderBottomLeftRadius = "0";
     document.querySelector(".card").style.borderBottomRightRadius = "0";
     document.querySelector(".card").style.boxShadow = "none";
@@ -284,6 +286,7 @@ acc2.addEventListener("click", function () {
   let panel2 = document.querySelector(".panel2");
   if (panel2.style.display === "flex") {
     panel2.style.display = "none";
+    document.querySelector("#updownBtn").style.transform = "rotate(0deg)"
     document.querySelector(".card2").style.borderBottomLeftRadius = "8px";
     document.querySelector(".card2").style.borderBottomRightRadius = "8px";
     document.querySelector(".card2").style.boxShadow = "0px 1px 6px rgba(95, 243, 208, 0.5)";
@@ -291,6 +294,7 @@ acc2.addEventListener("click", function () {
     document.querySelector(".panel2").style.borderBottomRightRadius = "0";
   } else {
     panel2.style.display = "flex";
+    document.querySelector("#updownBtn").style.transform = "rotate(180deg)"
     document.querySelector(".card2").style.borderBottomLeftRadius = "0";
     document.querySelector(".card2").style.borderBottomRightRadius = "0";
     document.querySelector(".card2").style.boxShadow = "none";

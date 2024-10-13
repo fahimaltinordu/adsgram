@@ -403,6 +403,13 @@ hr {
   background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100%, rgba(97,246,178,1) 100%);
 }
 
+/* ARROW UP DOWN */
+#updownBtn,
+#updownBtn1 {
+  background:transparent;
+  transition: all 0.2s;
+}
+
 /* LUCKY WHEEL */
 .wheel_cont {
     display: flex;
