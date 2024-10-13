@@ -246,6 +246,7 @@ hr {
 }
 .missionText{
   font-weight: 700;
+  text-align: center;
 }
 .card .description p,
 .card2 .description p {
@@ -255,10 +256,10 @@ hr {
 
 .card .description > span,
 .card2 .description > span,
-.missionText {
+.missionText > span{
     font-size: 1.2rem;
     text-align: center;
-    color: #008b6a;
+    color: #4f716c;
 }
 
 .earn__item__watch-count {
@@ -832,7 +833,7 @@ hr {
 
     .card .description span, 
     .card2 .description span,
-    .missionText {
+    .missionText span {
         font-size: 0.9rem;
     }
     .card img, 
