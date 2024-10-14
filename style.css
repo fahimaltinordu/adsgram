@@ -425,8 +425,9 @@ hr {
   justify-content: center;
   flex-direction: column;
   width: 70%;
-  margin-top:30px;
-  background: #000000;
+  margin-top:10px;
+  background: rgb(82,250,173);
+  background: radial-gradient(circle, rgba(82,250,173,1) 0%, rgba(148,187,233,1) 100%);
   padding: 15px;
   color:white;
   border-radius: 15px;
@@ -434,6 +435,8 @@ hr {
 }
 .farming pre {
   font-size: 0.8rem;
+  font-weight: 700;
+  color:black;
 }
 .farm {
   padding: 10px 20px;
@@ -444,7 +447,7 @@ hr {
   border-radius: 10px;
   cursor: pointer;
   color: white;
-  background: linear-gradient(90deg, rgba(86,250,173,1) 0%, rgba(98,236,240,1) 100%, rgba(97,246,178,1) 100%);
+  background: black;
 }
 .farm:active,
 .farmBoost button:active {
@@ -455,7 +458,7 @@ hr {
 }
 .farmBoost img{
   height:5dvh;
-  filter: drop-shadow(0.05rem 0.05rem 0.1rem #5ff3d0);
+  filter: drop-shadow(0.05rem 0.05rem 0.1rem #ffffff);
 }
 
 /* LUCKY WHEEL */
