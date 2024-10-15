@@ -71,6 +71,42 @@ mineTabButtons.forEach((mineTabButton) => {
   });
 });
 
+//FARMING 
+const farmButton = document.querySelector(".farm");
+const farmTimer = document.querySelector(".timer");
+let sec = 5; //backendden gelecek
+let FarmCountDown;
+
+farmButton.addEventListener("click", ()=> {
+  if (farmButton.textContent==="Start Farming") {
+     FarmCountDown = setInterval(function () {
+        let min = Math.floor(sec / 60),
+            remSec = sec % 60;    
+        if (remSec < 10) {        
+            remSec = '0' + remSec;    
+        }
+        if (min < 10) {        
+            min = '0' + min;
+        }
+        farmTimer.textContent = min + ":" + remSec;
+        if (sec > 0) { 
+          sec = sec - 1;      
+        } else {   
+          farmButton.textContent = "Claim";
+          farmTimer.textContent = 'You can claim reward'; 
+          clearInterval(FarmCountDown); 
+        }
+      }, 1000);
+  } else if (farmButton.textContent==="Claim") {
+    showToast("success", "claimed");
+    farmTimer.textContent = ''; 
+    farmButton.textContent = "Start Farming";
+  } 
+  
+});
+
+
+
 //SWAL ALERT
 function showToast(icon, title) {
   Swal.fire({
