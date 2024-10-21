@@ -12,7 +12,7 @@ const mineTabButtons = document.querySelectorAll('.mine-tab__btn');
 // const copyBtn = document.querySelector('#copyLink')
 
 const botLink = "https://t.me/ILCOIN_Earn_bot/ilcoin?startapp=";
-
+const tokenName = "ILC"
 
 //CATEGORIES
 const tab1 = "Home";
@@ -74,36 +74,75 @@ mineTabButtons.forEach((mineTabButton) => {
 //FARMING 
 const farmButton = document.querySelector(".farm");
 const farmTimer = document.querySelector(".timer");
-let sec = 5; //backendden gelecek
+let coinIncrementElement = document.querySelector(".coinIncrement");
+let farmingTime = 5 ; // This could be dynamically come from backend
+
+let sec = farmingTime - 1 ; 
+let coinsEarned = 0; // This could be dynamically come from backend
+let coinIncrement = 0.00000001; //This could be dynamically set from backend
 let FarmCountDown;
 
-farmButton.addEventListener("click", ()=> {
-  if (farmButton.textContent==="Start Farming") {
-     FarmCountDown = setInterval(function () {
-        let min = Math.floor(sec / 60),
-            remSec = sec % 60;    
-        if (remSec < 10) {        
-            remSec = '0' + remSec;    
-        }
-        if (min < 10) {        
-            min = '0' + min;
-        }
-        farmTimer.textContent = min + ":" + remSec;
-        if (sec > 0) { 
-          sec = sec - 1;      
-        } else {   
-          farmButton.textContent = "Claim";
-          farmTimer.textContent = 'You can claim reward'; 
-          clearInterval(FarmCountDown); 
-        }
-      }, 1000);
-  } else if (farmButton.textContent==="Claim") {
+coinIncrementElement.textContent = `${parseFloat(coinIncrement).toFixed(8)} ${tokenName} / sec`;
+
+//Diable/enable Button
+function disableFarmButton() {
+  farmButton.disabled = true;
+  farmButton.style.pointerEvents = "none";
+  farmButton.style.opacity = "0.8";
+}
+function enableFarmButton() {
+  farmButton.disabled = false; // Re-enable button for claiming
+  farmButton.style.pointerEvents = "auto";
+  farmButton.style.opacity = "1";
+}
+
+farmButton.addEventListener("click", handleFarm);
+
+function handleFarm() {
+  if (farmButton.textContent === "Start Farming") {
+    // Disable the button to prevent multiple clicks
+    disableFarmButton();
+    coinsEarned = 0; // Reset coins earned at the start
+
+    FarmCountDown = setInterval(function () {
+      let min = Math.floor(sec / 60),
+          remSec = sec % 60;    
+
+      if (remSec < 10) {        
+        remSec = '0' + remSec;    
+      }
+      if (min < 10) {        
+        min = '0' + min;
+      }
+      farmTimer.textContent = min + ":" + remSec;
+
+      // Increment coins by 'coinIncrement' every second
+      coinsEarned += coinIncrement; 
+      farmButton.textContent=parseFloat(coinsEarned).toFixed(8);
+
+      if (sec > 0) { 
+        sec -= 1;      
+      } else {   
+        clearInterval(FarmCountDown);
+        farmButton.textContent = `Claim ${coinsEarned.toFixed(8)} ${tokenName}`;
+        farmTimer.textContent = `Coins earned: ${coinsEarned.toFixed(8)} ${tokenName}`; 
+        enableFarmButton();
+      }
+    }, 1000);
+    
+  } else  {
     showToast("success", "claimed");
     farmTimer.textContent = ''; 
     farmButton.textContent = "Start Farming";
+    sec = farmingTime - 1 ; // Reset sec for next farming session
+    enableFarmButton();
   } 
-  
-});
+}
+
+
+
+
+  // farmButton.removeEventListener("click", handleFarm) 
 
 
 
@@ -203,7 +242,7 @@ adsenseBtn.addEventListener("click", () => {
         //breakStatus: 'notReady|timeout|error|noAdPreloaded|frequencyCapped|ignored|other|dismissed|viewed',
         switch (placementInfo.breakStatus) {
           case "viewed":
-            showToast("success", `Congratulations, +0.1 ILC added`);
+            showToast("success", `Congratulations, +0.1 ${tokenName} added`);
             break;
           case "notReady":
             showToast("error", `Ad is not ready`);
